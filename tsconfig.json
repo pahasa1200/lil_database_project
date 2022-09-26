@@ -11,6 +11,7 @@
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "sourceMap": true,
+    "types": ["element-plus/global"],
     "baseUrl": ".",
     "types": [
       "webpack-env",
