@@ -1,5 +1,5 @@
 <template>
-  <div class="add">
+  <div v-loading="loading" class="add">
     <h1>Добавление новой запчасти</h1>
     <ResetButton v-if="Object.keys(store.state.filters).length > 0" />
     <AutoInput
@@ -77,8 +77,10 @@ const fuel = ref('');
 const year = ref('');
 const carBody = ref('');
 const volume = ref('');
+const loading = ref();
 
 const handleSubmit = async () => {
+  loading.value = true;
   await store.dispatch('addPart', {
     name: brand.value,
     body: carBody.value,
@@ -88,6 +90,7 @@ const handleSubmit = async () => {
     year: year.value,
     additionalInfo: textarea.value,
   });
+  loading.value = false;
   await router.push({ name: 'Home' });
 };
 </script>

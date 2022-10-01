@@ -1,5 +1,5 @@
 <template>
-  <div class="delete">
+  <div v-loading="loading" class="delete">
     <h1>Удаление запчасти</h1>
     <ResetButton v-if="Object.keys(store.state.filters).length > 0" />
     <Table :state="store.state.parts">
@@ -16,13 +16,17 @@
 
 <script lang="ts" setup>
 import { useStore } from 'vuex';
+import { ref } from 'vue';
 import Table from '../components/Commons/Table.vue';
 import ResetButton from '../components/Commons/ResetFilterButton.vue';
 
 const store = useStore();
+const loading = ref();
 
 const handleClick = async (id: number) => {
+  loading.value = true;
   await store.dispatch('deletePart', id);
+  loading.value = false;
 };
 </script>
 

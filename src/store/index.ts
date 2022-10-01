@@ -1,5 +1,8 @@
 import { createStore } from 'vuex';
 import axios from 'axios';
+import { PartType } from '@/@types/Parts';
+
+const baseUrl = 'https://mighty-dawn-71205.herokuapp.com';
 
 export default createStore({
   state: {
@@ -19,19 +22,19 @@ export default createStore({
   },
   actions: {
     async updateParts({ commit }) {
-      await axios.get('http://localhost:80/products')
+      await axios.get(`${baseUrl}/products`)
         .then((data) => {
           commit('addPartsInState', [...data.data.products]);
         });
     },
     async updatePartsStateWithFilters({ commit, state }) {
-      await axios.post('http://localhost:80/filter', state.filters)
+      await axios.post(`${baseUrl}/filter`, state.filters)
         .then((data) => {
           commit('addPartsInState', [...data.data.products]);
         });
     },
     async deletePart({ dispatch, state }, id) {
-      await axios.delete(`http://localhost:80/products?itemID=${id}`).then(() => {
+      await axios.delete(`${baseUrl}/products?itemID=${id}`).then(() => {
         if (Object.keys(state.filters).length > 0) {
           dispatch('updatePartsStateWithFilters');
         } else {
@@ -39,8 +42,8 @@ export default createStore({
         }
       });
     },
-    async addPart({ dispatch, state }, formValues: any) {
-      await axios.post('http://localhost:80/products', formValues).then(() => {
+    async addPart({ dispatch, state }, formValues: PartType) {
+      await axios.post(`${baseUrl}/products`, formValues).then(() => {
         if (Object.keys(state.filters).length > 0) {
           dispatch('updatePartsStateWithFilters');
         } else {
@@ -48,7 +51,7 @@ export default createStore({
         }
       });
     },
-    async addFilters({ commit, dispatch }, filters) {
+    addFilters({ commit, dispatch }, filters) {
       commit('addFiltersInState', filters);
       dispatch('updatePartsStateWithFilters');
     },

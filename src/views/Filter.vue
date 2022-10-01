@@ -69,8 +69,10 @@ const fuel = ref('');
 const year = ref('');
 const carBody = ref('');
 const volume = ref('');
+const loading = ref();
 
 const handleSubmit = async () => {
+  loading.value = true;
   await store.dispatch('addFilters', {
     name: brand.value,
     body: carBody.value,
@@ -79,6 +81,7 @@ const handleSubmit = async () => {
     volume: volume.value,
     year: year.value,
   });
+  loading.value = false;
   await router.push({ name: 'Home' });
 };
 </script>

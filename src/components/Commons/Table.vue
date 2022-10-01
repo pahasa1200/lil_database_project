@@ -3,12 +3,34 @@
     <el-table-column type="expand">
       <template #default="props">
         <div m="4">
-          <p m="t-0 b-2">Модель: {{ props.row.name }}</p>
-          <p m="t-0 b-2">Тип запчасти: {{ props.row.type }}</p>
-          <p m="t-0 b-2">Топливо: {{ props.row.fuel }}</p>
-          <p m="t-0 b-2">Год: {{ props.row.year }}</p>
-          <p m="t-0 b-2">Кузов: {{ props.row.body }}</p>
-          <p m="t-0 b-2">Объем: {{ props.row.volume }}</p>
+          <p m="t-0 b-2">
+            <strong>Модель:</strong>
+            {{ props.row.name }}
+          </p>
+          <p m="t-0 b-2">
+            <strong>Тип запчасти:</strong>
+            {{ props.row.type }}
+          </p>
+          <p m="t-0 b-2">
+            <strong>Топливо:</strong>
+            {{ props.row.fuel }}
+          </p>
+          <p m="t-0 b-2">
+            <strong>Год:</strong>
+            {{ props.row.year }}
+          </p>
+          <p m="t-0 b-2">
+            <strong>Кузов:</strong>
+            {{ props.row.body }}
+          </p>
+          <p m="t-0 b-2">
+            <strong>Объем:</strong>
+            {{ props.row.volume }}
+          </p>
+          <p m="t-0 b-2">
+            <strong>Дополнительная информация:</strong>
+            {{ props.row.additionalInfo }}
+          </p>
         </div>
       </template>
     </el-table-column>
@@ -22,7 +44,7 @@
 <script lang="ts" setup>
 
 // eslint-disable-next-line no-undef
-const props = defineProps<{
+defineProps<{
   state: []
 }>();
 </script>

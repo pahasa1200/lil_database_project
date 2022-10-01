@@ -5,17 +5,20 @@
     <router-link to="/add">Добавить</router-link> |
     <router-link to="/delete">Удалить</router-link>
   </div>
-  <router-view/>
+  <router-view v-loading="loading" />
 </template>
 
 <script lang="ts" setup>
-import { onBeforeMount, watch } from 'vue';
+import { onBeforeMount, ref } from 'vue';
 import { useStore } from 'vuex';
 
 const store = useStore();
+const loading = ref();
 
 onBeforeMount(async () => {
+  loading.value = true;
   await store.dispatch('updateParts');
+  loading.value = false;
 });
 </script>
 
@@ -29,7 +32,6 @@ onBeforeMount(async () => {
 }
 
 #nav {
-
   a {
     font-weight: bold;
     color: #2c3e50;
