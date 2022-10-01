@@ -2,7 +2,7 @@
   <div v-loading="loading" class="delete">
     <h1>Удаление запчасти</h1>
     <ResetButton v-if="Object.keys(store.state.filters).length > 0" />
-    <Table :state="store.state.parts">
+    <Table :state="store.state.parts" :columns="columns">
       <el-table-column label="" >
         <template #default="scope">
           <el-button link type="primary" size="small" @click="handleClick(scope.row._id)">
@@ -22,6 +22,16 @@ import ResetButton from '../components/Commons/ResetFilterButton.vue';
 
 const store = useStore();
 const loading = ref();
+const columns = ref([
+  'ID',
+  'Модель',
+  'Тип запчасти',
+  'Топливо',
+  'Год',
+  'Кузов',
+  'Объем',
+  'Дополнительная информация',
+]);
 
 const handleClick = async (id: number) => {
   loading.value = true;

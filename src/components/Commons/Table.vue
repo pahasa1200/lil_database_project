@@ -3,33 +3,9 @@
     <el-table-column type="expand">
       <template #default="props">
         <div m="4">
-          <p m="t-0 b-2">
-            <strong>Модель:</strong>
-            {{ props.row.name }}
-          </p>
-          <p m="t-0 b-2">
-            <strong>Тип запчасти:</strong>
-            {{ props.row.type }}
-          </p>
-          <p m="t-0 b-2">
-            <strong>Топливо:</strong>
-            {{ props.row.fuel }}
-          </p>
-          <p m="t-0 b-2">
-            <strong>Год:</strong>
-            {{ props.row.year }}
-          </p>
-          <p m="t-0 b-2">
-            <strong>Кузов:</strong>
-            {{ props.row.body }}
-          </p>
-          <p m="t-0 b-2">
-            <strong>Объем:</strong>
-            {{ props.row.volume }}
-          </p>
-          <p m="t-0 b-2">
-            <strong>Дополнительная информация:</strong>
-            {{ props.row.additionalInfo }}
+          <p v-for="(value,  key, i) in props.row" :key="value._id" m="t-0 b-2">
+            <strong>{{ columns[i] }}:</strong>
+            {{ value }}
           </p>
         </div>
       </template>
@@ -45,7 +21,8 @@
 
 // eslint-disable-next-line no-undef
 defineProps<{
-  state: []
+  state: [],
+  columns: []
 }>();
 </script>
 
