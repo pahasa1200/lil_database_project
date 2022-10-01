@@ -72,22 +72,7 @@ const handleSelect = (item: RestaurantItem) => {
   // console.log(item);
 };
 
-watch(
-  () => props.stateFromProps,
-  () => {
-    restaurants.value = [];
-    const check: string[] = [];
-    for (let i = 0; i < props.stateFromProps.length; i += 1) {
-      const val = props.stateFromProps[i][props.inputName];
-      if (!check.includes(val)) {
-        check.push(val);
-        restaurants.value.push({ value: val, link: '' });
-      }
-    }
-  },
-);
-
-onBeforeMount(() => {
+const changeRestaurantsObj = () => {
   restaurants.value = [];
   const check: string[] = [];
   for (let i = 0; i < props.stateFromProps.length; i += 1) {
@@ -97,6 +82,17 @@ onBeforeMount(() => {
       restaurants.value.push({ value: val, link: '' });
     }
   }
+};
+
+watch(
+  () => props.stateFromProps,
+  () => {
+    changeRestaurantsObj();
+  },
+);
+
+onBeforeMount(() => {
+  changeRestaurantsObj();
 });
 </script>
 
